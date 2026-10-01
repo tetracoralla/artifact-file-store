@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "_source": "openadam-artifact-file-store@0.1.0 fixtures/artifact-file-store-fixture.json",
+  "revisions": [
+    {
+      "bytesHex": "232048656c6c6f0a",
+      "prefix": "",
+      "expected": "90f8ec5669cd34183b9b0fdf8b94f5efb4c3672876330f4aa76088c2b4ad17be"
+    },
+    {
+      "bytesHex": "232048656c6c6f0a",
+      "prefix": "sha256:",
+      "expected": "sha256:90f8ec5669cd34183b9b0fdf8b94f5efb4c3672876330f4aa76088c2b4ad17be"
+    },
+    {
+      "bytesHex": "efbbbf2d20610d0a2d20620d0a",
+      "prefix": "sha256:",
+      "expected": "sha256:8349210aaf558b87f119eba1fc27bcee72fe6ce7a378f934616110391ddc54d3"
+    },
+    {
+      "bytesHex": "e4b8ade69687206d696e64206d617020f09fa7a00a",
+      "prefix": "sha256:",
+      "expected": "sha256:59a14ad32e1c6521d8747daf7f6afc6e03b374dd3853396bddca4599f2f7e80d"
+    },
+    {
+      "bytesHex": "",
+      "prefix": "",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "lockKeys": [
+    {
+      "platform": "posix",
+      "path": "/Users/example/Documents/plan.md",
+      "key": "/Users/example/Documents/plan.md",
+      "expectedDigest": "ce6e8862c89860c8ac43212c1516ec1f"
+    },
+    {
+      "platform": "posix",
+      "path": "/tmp/spaces in name/a.markdown",
+      "key": "/tmp/spaces in name/a.markdown",
+      "expectedDigest": "1c0fca7646bc05e0a5419d8774835097"
+    },
+    {
+      "platform": "win32",
+      "path": "C:\\Users\\example\\a.md",
+      "key": "C:\\Users\\example\\a.md",
+      "expectedDigest": "b417d8ae8c19f9739a9ea116cb979c2c"
+    },
+    {
+      "platform": "win32",
+      "path": "\\\\?\\C:\\Users\\example\\a.md",
+      "key": "C:\\Users\\example\\a.md",
+      "expectedDigest": "b417d8ae8c19f9739a9ea116cb979c2c"
+    },
+    {
+      "platform": "win32",
+      "path": "\\\\?\\UNC\\\\server\\share\\docs\\a.md",
+      "key": "\\\\\\server\\share\\docs\\a.md",
+      "expectedDigest": "08ac5df78fbc90df9d69ed67a2c3d091"
+    },
+    {
+      "platform": "win32",
+      "path": "C:/Users/example/forward/slashes.md",
+      "key": "C:\\Users\\example\\forward\\slashes.md",
+      "expectedDigest": "88288bf73d32bf8f996ee591345b393e"
+    }
+  ],
+  "lockName": {
+    "prefix": ".laniakea-lock-",
+    "format": "<prefix><first 32 hex of sha256(key)>"
+  },
+  "owner": {
+    "codec": "text-pid",
+    "encoding": "utf8",
+    "parseableExamples": [
+      "999999\n",
+      "1\n"
+    ],
+    "invalidExamples": [
+      "",
+      "not-a-pid\n"
+    ],
+    "nonPositiveExamples": [
+      "-5\n"
+    ],
+    "nonPositiveRule": "a non-positive pid may never be treated as a dead owner by any carrier"
+  },
+  "artifactLock": {
+    "protocol": 1,
+    "nameVectors": [
+      {
+        "basename": "doc.md",
+        "expected": ".openadam-artifact-07d30049577ad63d59568f23.lock"
+      },
+      {
+        "basename": "方案.md",
+        "expected": ".openadam-artifact-5203e726b64a4339b37e7d24.lock"
+      },
+      {
+        "basename": "É.md",
+        "expected": ".openadam-artifact-451cc55febec5dea2f021887.lock"
+      },
+      {
+        "basename": "É.md",
+        "expected": ".openadam-artifact-451cc55febec5dea2f021887.lock"
+      },
+      {
+        "basename": "File.md",
+        "expected": ".openadam-artifact-5d08256fe6fa5f1215bb8f7a.lock"
+      },
+      {
+        "basename": "file.md",
+        "expected": ".openadam-artifact-5d08256fe6fa5f1215bb8f7a.lock"
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "openadam-artifact-file-store",
+  "version": "0.2.4",
+  "private": true,
+  "license": "Apache-2.0",
+  "description": "Safe single-file artifact storage: byte-exact revisions, atomic create/replace publication, and cooperative cross-process locks with non-Node-compatible naming vectors.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "fixtures",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "check": "npm run test",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  }
+}
