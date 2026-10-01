@@ -1,7 +1,6 @@
 # openadam-artifact-file-store
 
-Private shared package (Apache-2.0, extracted from Calligram and Laniakea; not
-published). It owns the safe single-file artifact storage guarantees local
+Apache-2.0 library extracted from Calligram and Laniakea. It owns the safe single-file artifact storage guarantees local
 tools need when a whole artifact lives in one file:
 
 - byte-exact revision identity (a leading BOM or CRLF change always changes
@@ -18,6 +17,43 @@ tools need when a whole artifact lives in one file:
 - digest lock naming (`laniakeaLockPath` / `hashedLockName` normalization) with
   a versioned fixture (`fixtures/artifact-file-store-fixture.json`) that any
   non-Node carrier can implement against the same vectors.
+
+## Install and quick start
+
+Install the versioned [GitHub release artifact](https://github.com/tetracoralla/artifact-file-store/releases/tag/v0.2.5) directly:
+
+```sh
+npm install https://github.com/tetracoralla/artifact-file-store/releases/download/v0.2.5/openadam-artifact-file-store-0.2.5.tgz
+```
+
+Once this version is available on npm, registry installation is:
+
+```sh
+npm install openadam-artifact-file-store@0.2.5
+```
+
+```js
+import { writeArtifactFile, withArtifactWriteLock } from "openadam-artifact-file-store";
+
+const result = await withArtifactWriteLock("./draft.md", () =>
+  writeArtifactFile("./draft.md", "# Draft\n", { kind: "create" })
+);
+console.log(result.revision, result.warnings);
+```
+
+The parent directory must exist and be authorized by the application. `create`
+refuses to overwrite an existing file. Use `replace` only with explicit overwrite
+authority; applications compare the expected revision inside the same lock before
+replacing. Inspect warnings even after success: publication can succeed while an
+auxiliary sync or cleanup fails. No workspace grants are provided by this library.
+
+ESM, Node >= 22, zero runtime dependencies. TypeScript applications use
+`@types/node` for the Node platform types in the public declarations. The write/lock operations are tested
+on macOS and Linux, on local filesystems providing hard links and atomic rename.
+Windows path-key fixtures are provided for interoperability, but a complete
+Windows persistence guarantee and network-filesystem behavior are not established.
+The SHA-256 fixture and protocol version remain stable independently of package
+patch versions. See [RELEASING.md](RELEASING.md) for verified release artifacts.
 
 ## Scope deliberately left to products
 

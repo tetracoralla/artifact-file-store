@@ -1,0 +1,39 @@
+name: Publish npm package
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact reviewed package version
+        type: string
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - name: Verify version and release tag
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          test "$VERSION" = "$(node -p "require('./package.json').version")"
+          test "$(git ls-remote origin refs/tags/v$VERSION^{} | cut -f1)" = "$(git rev-parse HEAD)"
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npm publish --access public

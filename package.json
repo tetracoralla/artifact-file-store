@@ -1,7 +1,6 @@
 {
   "name": "openadam-artifact-file-store",
-  "version": "0.2.4",
-  "private": true,
+  "version": "0.2.5",
   "license": "Apache-2.0",
   "description": "Safe single-file artifact storage: byte-exact revisions, atomic create/replace publication, and cooperative cross-process locks with non-Node-compatible naming vectors.",
   "type": "module",
@@ -21,16 +20,44 @@
     "fixtures",
     "LICENSE",
     "NOTICE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node --test tests/*.test.mjs",
-    "check": "npm run test",
-    "prepare": "npm run build"
+    "check": "npm test && npm run check:package",
+    "prepack": "npm run build",
+    "check:package": "node scripts/check-package.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",
     "typescript": "^5.8.3"
-  }
+  },
+  "author": {
+    "name": "openAdam",
+    "url": "https://github.com/tetracoralla"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tetracoralla/artifact-file-store.git"
+  },
+  "homepage": "https://github.com/tetracoralla/artifact-file-store#readme",
+  "bugs": {
+    "url": "https://github.com/tetracoralla/artifact-file-store/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "sideEffects": false,
+  "keywords": [
+    "atomic-write",
+    "file-store",
+    "revision",
+    "conflict",
+    "cross-process",
+    "lock",
+    "artifact"
+  ]
 }
